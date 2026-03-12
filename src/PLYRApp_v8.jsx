@@ -210,7 +210,7 @@ const getTier=elo=>TIERS.find(t=>elo>=t.min&&elo<=t.max)||TIERS[0];
 /* ─── DATA ─── */
 const MY_USER={name:"אסף",initials:"AS",level:3,elo:1540,sports:["כדורגל","רכיבה","שחייה"],friends:12,events:5,points:340,role:"player",bio:"שחקן כדורגל נלהב מת\"א 🔥",instagram:"asaf_plays",facebook:"",twitter:"",locked:false,wins:8,losses:2,draws:1,defense:8.2,offense:7.6,
   achievements:[{icon:"🎮",title:"מתחיל",desc:"משחק ראשון",u:true},{icon:"🔥",title:"על האש",desc:"3 ברצף",u:true},{icon:"🏆",title:"אלוף",desc:"10 ניצחונות",u:false},{icon:"👥",title:"חברותי",desc:"10 חברים",u:false},{icon:"⚡",title:"בזק",desc:"הצטרף תוך דקה",u:false},{icon:"🌟",title:"סטאר",desc:"50 לייקים",u:false}],
-  seasons:[{month:"מרץ 2026",rank:3,elo:1540,games:11,pts:340},{month:"פבר 2026",rank:7,elo:1510,games:9,pts:290},{month:"ינו 2026",rank:12,elo:1480,games:8,pts:260}],
+  seasons:[],  // real season history comes from the database
   challenges:[
     {id:1,title:"שחק 5 משחקים השבוע",icon:"🔥",progress:3,total:5,done:false,reward:"50 XP",category:"שבועי",color:"#FF6B2B"},
     {id:2,title:"נקד 8+ הגנה ב-3 משחקים",icon:"🛡️",progress:2,total:3,done:false,reward:"40 XP",category:"שבועי",color:"#4D9FFF"},
@@ -236,7 +236,7 @@ const DEMO_USERS={
     email:"asaf@gmail.com",phone:"+972-50-123-4567",
     bio:"שחקן כדורגל נלהב מתל אביב 🔥",instagram:"asaf_plays",
     facebook:"",twitter:"",photo:null,elo:1540,level:3,role:"player",roleBadge:"⚽ שחקן",
-    friends:12,events:5,points:340,wins:8,losses:2,draws:1,defense:8.2,offense:7.6,xp:3200,
+    friends:0,events:0,points:0,wins:0,losses:0,draws:0,defense:0,offense:0,xp:0,
     sports:["football","running"],
     activityLog:[
       {id:1,sport:"running",date:"2026-03-05",label:"ריצת בוקר 5K",duration:28,endurance:82,speed:76,enabled:true},
@@ -250,14 +250,11 @@ const DEMO_USERS={
     email:"dani@referee.co.il",phone:"+972-52-987-6543",
     bio:"שופט כדורגל מורשה UEFA - 8 שנות ניסיון",instagram:"dani_referee",
     facebook:"",twitter:"",photo:null,elo:1420,level:4,role:"referee",roleBadge:"⚖️ שופט",
-    friends:8,events:34,points:890,wins:0,losses:0,draws:0,defense:0,offense:0,
+    friends:0,events:0,points:0,wins:0,losses:0,draws:0,defense:0,offense:0,
     sports:["football","basketball"],
     refLevel:"שופט לאומי",refCert:"IL-REF-4821",yearsExp:"8",rate:"200",availability:"partial",
     website:"https://linkedin.com/in/daniref",resumeName:"dani_ref_resume.pdf",services:[],
-    refRatings:[
-      {id:1,team:"FC Yarkon",initials:"🦅",date:"2026-03-01",game:"כדורגל חצי גמר",scores:{accuracy:8.5,fairness:9,fitness:8,communication:9.5,authority:8},comment:"שופט מצוין!"},
-      {id:2,team:"Street Kings",initials:"SK",date:"2026-02-22",game:"כדורסל גמר",scores:{accuracy:7.5,fairness:8,fitness:9,communication:8,authority:7.5},comment:"מקצועי"},
-    ],
+    refRatings:[],  // real ratings come from the database
     achievements:MY_USER.achievements,seasons:MY_USER.seasons,challenges:MY_USER.challenges,
   },
   coach:{
@@ -265,46 +262,27 @@ const DEMO_USERS={
     email:"ron@coach.co.il",phone:"+972-54-111-2222",
     bio:"מאמן כדורגל מוסמך UEFA B 🎓 | 10 שנות ניסיון | 3 בוגרים בליגה לאומית",instagram:"coach_ron_il",
     facebook:"",twitter:"",photo:null,elo:1720,level:5,role:"coach",roleBadge:"🎓 מאמן",
-    friends:24,events:52,points:1840,wins:28,losses:4,draws:5,defense:9.2,offense:9.5,xp:18000,
+    friends:0,events:0,points:0,wins:0,losses:0,draws:0,defense:0,offense:0,xp:0,
     sports:["football","basketball"],
     certLevel:"UEFA B",certId:"UEFA-B-7731",yearsExp:"10",rate:"280",availability:"partial",
     website:"https://linkedin.com/in/coachron",resumeName:"coach_ron_resume.pdf",
     trainingSessions:89,studentsTotal:34,studentsActive:12,successRate:87,
-    coachRatings:[
-      {id:1,student:"adi_soccer",initials:"AD",date:"2026-03-02",session:"אימון כדורגל",scores:{tactics:9,communication:9.5,motivation:10,technique:8.5,progress:9},comment:"מאמן מדהים! שיפרתי את עצמי פלאים"},
-      {id:2,student:"maya_run",initials:"MY",date:"2026-02-18",session:"אימון ריצה",scores:{tactics:8,communication:9,motivation:9.5,technique:8,progress:8.5},comment:"מסביר נהדר"},
-    ],
+    coachRatings:[],  // real ratings come from the database
     achievements:MY_USER.achievements,seasons:MY_USER.seasons,challenges:MY_USER.challenges,
   },
 };
 
-const STORIES=[{id:1,user:"אסף",initials:"AS",color:"#3B5BDB",hasStory:false,isMe:true},{id:2,user:"adi",initials:"AD",color:"#00C07F",hasStory:true},{id:3,user:"ron",initials:"RO",color:"#FF6B2B",hasStory:true},{id:4,user:"maya",initials:"MY",color:"#A855F7",hasStory:true},{id:5,user:"coach_ron",initials:"CR",color:"#0077CC",hasStory:true},{id:6,user:"dan",initials:"DB",color:"#FF4757",hasStory:false}];
+// Only the current user's own "add story" slot — real friend stories come from the backend.
+const STORIES=[{id:1,user:"אסף",initials:"AS",color:"#3B5BDB",hasStory:false,isMe:true}];
 
-const FEED_FOLLOWING=[
-  {id:1,user:"adi_soccer",initials:"AD",role:"player",sport:"football",type:"result",content:"משחק מטורף! ניצחנו 3-1 נגד FC North 🔥",score:"3 - 1",location:"פארק הירקון",time:"לפני 12 דק'",likes:24,comments:8,liked:false,tags:["⚽","🔥 ניצחון"],elo:1520},
-  {id:2,user:"coach_ron",initials:"CR",role:"coach",sport:"basketball",type:"training",content:"תוכנית אימון חדשה לשיפור הגנה 🛡️  -  3 תרגילים שיעלו אתכם רמה",location:"אונליין",time:"לפני 45 דק'",likes:57,comments:14,liked:true,tags:["🏀","🎓 מאמן"],elo:1680},
-  {id:3,user:"maya_run",initials:"MY",role:"player",sport:"running",type:"event",content:"הצטרפתי לריצת בוקר! מי בא? 🌅 יש עוד 4 מקומות",location:"פארק הירקון · ראשון 06:30",time:"לפני שעה",likes:18,comments:5,liked:false,tags:["🏃","🌅 בוקר"],elo:1390,isEvent:true,slots:4},
-  {id:4,user:"dan_bball",initials:"DB",role:"player",sport:"basketball",type:"achievement",content:"עלה לרמת יהלום! 🔷 אחרי 3 ניצחונות ברצף",location:"מגרש הנמל",time:"לפני 2 שעות",likes:41,comments:9,liked:false,tags:["🏀","🔷 יהלום"],elo:1510},
-];
-const FEED_FOR_YOU=[
-  {id:10,user:"yarkon_fc",initials:"YF",role:"player",sport:"football",type:"event",content:"פותחים משחק שישי הקרוב! 4 מקומות נשארו 🔥 ELO 1400+",location:"פארק הירקון · שישי 18:00",time:"לפני 3 שעות",likes:33,comments:11,liked:false,tags:["⚽","📅 שישי"],elo:1540,isEvent:true,slots:4},
-  {id:11,user:"noa_tennis",initials:"NT",role:"player",sport:"tennis",type:"result",content:"ניצחון ראשון בטניס! 6-3, 6-4 💪",score:"6-3, 6-4",location:"טניס פארק",time:"לפני 4 שעות",likes:29,comments:6,liked:false,tags:["🎾","🏆 ניצחון"],elo:1420},
-  {id:12,user:"beach_ballers",initials:"BB",role:"player",sport:"volleyball",type:"event",content:"כדורעף חוף כל שישי! המקום הכי כיף בת\"א 🏐🏖️",location:"חוף הים · שישי 16:00",time:"אתמול",likes:62,comments:19,liked:true,tags:["🏐","🏖️ חוף"],elo:1460,isEvent:true,slots:3},
-  {id:13,user:"lior_coach",initials:"LC",role:"coach",sport:"football",type:"training",content:"5 טעויות שכל שחקן עושה בהגנה  -  ואיך לתקן 🎓",location:"אונליין",time:"אתמול",likes:88,comments:22,liked:false,tags:["⚽","🎓 טיפים"],elo:1700},
-];
+// Social feed posts come from the real backend.
+const FEED_FOLLOWING=[];
+const FEED_FOR_YOU=[];
 
-const CHATS_DATA=[
-  {id:1,user:"adi",initials:"AD",last:"מחר משחק? 🔥",time:"עכשיו",unread:2,online:true,type:"friend"},
-  {id:2,user:"ron",initials:"RO",last:"הצטרף לקבוצה שלנו",time:"לפני שעה",unread:1,online:false,type:"friend"},
-  {id:3,user:"FC Yarkon",initials:"🦅",last:"המשחק בשישי בערב",time:"אתמול",unread:0,online:false,type:"group"},
-  {id:4,user:"maya",initials:"MY",last:"ריצה מחר?",time:"אתמול",unread:0,online:true,type:"friend"},
-  {id:5,user:"dan_bball",initials:"DB",last:"ראיתי אותך במגרש 😄",time:"לפני יומיים",unread:0,online:false,type:"friend"},
-];
-const FRIEND_REQS=[
-  {id:1,user:"noa_runs",initials:"NR",sport:"running",mutual:3,elo:1380,bio:"ריצות בוקר 🏃"},
-  {id:2,user:"alex_swim",initials:"AS",sport:"swimming",mutual:1,elo:1510,bio:"שחייה תחרותית 🏊"},
-  {id:3,user:"coach_lior",initials:"CL",sport:"football",mutual:5,elo:1600,bio:"מאמן כדורגל 🎓"},
-];
+// Chats come from the real backend.
+const CHATS_DATA=[];
+// Friend requests come from the real backend.
+const FRIEND_REQS=[];
 
 const EVENTS_DATA=[
   {id:1,sport:"football",title:"משחק כדורגל",location:"פארק הירקון",date:"שישי, 7 מרץ",time:"18:00",players:6,max:10,tag:"כל הרמות",minElo:0,minDefense:0},
@@ -3554,7 +3532,18 @@ function HomePage(){
           </button>
         </div>
 
-        {feed.map(post=><FeedPost key={post.id} post={post}/>)}
+        {feed.length===0&&(
+            <div style={{textAlign:"center",padding:"48px 24px",direction:"rtl"}}>
+              <div style={{fontSize:36,marginBottom:12}}>🏃</div>
+              <div style={{color:"rgba(208,255,240,0.55)",fontWeight:700,fontSize:15,marginBottom:6}}>
+                {feedTab==="following"?"אין פוסטים עדיין":"אין תוכן בשבילך עדיין"}
+              </div>
+              <div style={{color:"rgba(208,255,240,0.25)",fontSize:12}}>
+                {feedTab==="following"?"עקוב אחרי שחקנים כדי לראות את הפידים שלהם כאן":"הצטרף לאירועים ומצא שחקנים"}
+              </div>
+            </div>
+          )}
+          {feed.map(post=><FeedPost key={post.id} post={post}/>)}
       </div>
 
       <Sheet open={postGameOpen} onClose={()=>setPostGameOpen(false)}
@@ -4422,7 +4411,10 @@ function ChatsPage(){
         </div>
       </div>
       <div style={{padding:"14px 16px",display:"flex",flexDirection:"column",gap:12}}>
-        {FRIEND_REQS.map(r=>(
+        {FRIEND_REQS.length===0&&(
+              <div style={{textAlign:"center",padding:"20px 0",direction:"rtl",color:"rgba(208,255,240,0.3)",fontSize:12}}>אין בקשות חברות ממתינות</div>
+            )}
+            {FRIEND_REQS.map(r=>(
           <div key={r.id} style={{background:C.card,borderRadius:18,padding:"14px 16px",
             border:`1px solid ${C.border}`,direction:"rtl"}}>
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:12}}>
@@ -15041,20 +15033,9 @@ function PhotoPickerSheet({open,onClose,onPhoto}){
 }
 
 /* ─── OTHER USERS (fictitious) ─── */
-const OTHER_USERS=[
-  {id:2,name:"עדי כהן",initials:"AD",color:"#00C07F",elo:1520,role:"player",sport:"football",bio:"כדורגל ❤️ FC North | תל אביב",instagram:"adi_soccer",wins:12,losses:3,draws:2,defense:8.8,offense:9.1,friends:24,events:18,points:520,photo:null,xp:3800,locked:false,
-    achievements:[{icon:"🔥",title:"על האש",desc:"3 ברצף",u:true},{icon:"🏆",title:"אלוף",desc:"10 ניצחונות",u:true},{icon:"🎮",title:"מתחיל",desc:"משחק ראשון",u:true},{icon:"👥",title:"חברותי",desc:"10 חברים",u:false}],
-    seasons:[{month:"מרץ 2026",rank:1,elo:1520,games:15,pts:520}],challenges:[]},
-  {id:3,name:"רון לוי",initials:"RO",color:"#FF6B2B",elo:1480,role:"player",sport:"basketball",bio:"כדורסל רחוב 🏀 | Street Kings",instagram:"ron_bball",wins:5,losses:3,draws:0,defense:7.5,offense:8.2,friends:9,events:8,points:290,photo:null,xp:1200,locked:false,
-    achievements:[{icon:"🎮",title:"מתחיל",desc:"משחק ראשון",u:true},{icon:"⚡",title:"בזק",desc:"הצטרף תוך דקה",u:true},{icon:"🏆",title:"אלוף",desc:"10 ניצחונות",u:false},{icon:"🌟",title:"סטאר",desc:"50 לייקים",u:false}],
-    seasons:[{month:"מרץ 2026",rank:5,elo:1480,games:8,pts:290}],challenges:[]},
-  {id:4,name:"מיה ישראלי",initials:"MY",color:"#A855F7",elo:1390,role:"player",sport:"running",bio:"ריצות בוקר 🌅 | פארק הירקון",instagram:"maya_run",wins:0,losses:0,draws:0,defense:0,offense:0,friends:15,events:30,points:410,photo:null,xp:2500,locked:false,
-    achievements:[{icon:"🎮",title:"מתחיל",desc:"משחק ראשון",u:true},{icon:"🌟",title:"סטאר",desc:"50 לייקים",u:true},{icon:"🔥",title:"על האש",desc:"3 ברצף",u:false},{icon:"🏆",title:"אלוף",desc:"10 ניצחונות",u:false}],
-    seasons:[{month:"מרץ 2026",rank:2,elo:1390,games:30,pts:410}],challenges:[]},
-  {id:5,name:"קואצ' רון",initials:"CR",color:"#0077CC",elo:1680,role:"coach",sport:"football",bio:"מאמן כדורגל מוסמך 🎓 | 15 שנות ניסיון",instagram:"coach_ron_il",wins:28,losses:4,draws:5,defense:9.2,offense:9.5,friends:67,events:52,points:1840,photo:null,xp:18000,locked:false,
-    achievements:[{icon:"🎓",title:"מאמן",desc:"הוסמך",u:true},{icon:"👑",title:"אלוף",desc:"אלוף עונה",u:true},{icon:"🔥",title:"על האש",desc:"3 ברצף",u:true},{icon:"🌟",title:"סטאר",desc:"50 לייקים",u:true}],
-    seasons:[{month:"מרץ 2026",rank:1,elo:1680,games:37,pts:1840}],challenges:[]},
-];
+// Other user profiles come from the real backend.
+const OTHER_USERS=[];
+
 
 /* ─── SETTINGS ACCOUNT SUB-PAGE  -  standalone component to avoid TF-inside-component bug ─── */
 /* ─── MODULE-SCOPE input helpers  -  MUST be outside any component to prevent focus loss ─── */
@@ -19831,7 +19812,7 @@ export default function PLYRApp(){
   const C = darkMode ? darkTheme : lightTheme;
   const isRTL = ["he","ar","fa"].includes(language);
   const dir = isRTL ? "rtl" : "ltr";
-  const totalUnread=CHATS_DATA.reduce((s,c)=>s+c.unread,0)+FRIEND_REQS.length;
+  const totalUnread=CHATS_DATA.reduce((s,c)=>s+c.unread,0)+FRIEND_REQS.length; // will be 0 until real backend connected
   const T = (key) => t(language, key);
   const isReferee = globalUser.role==="referee";
   const isCoach   = globalUser.role==="coach";
