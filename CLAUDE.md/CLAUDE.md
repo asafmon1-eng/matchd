@@ -27,3 +27,4 @@ After each change:
 
 Goal of the project:
 Build MATCHD as a live sports activity map where users can see real activity hotspots by sport and location.
+
